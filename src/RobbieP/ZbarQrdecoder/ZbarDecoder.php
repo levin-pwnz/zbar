@@ -5,6 +5,7 @@ namespace RobbieP\ZbarQrdecoder;
 use Exception;
 use RobbieP\ZbarQrdecoder\Result\ErrorResult;
 use RobbieP\ZbarQrdecoder\Result\Result;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
 class ZbarDecoder
@@ -119,12 +120,10 @@ class ZbarDecoder
      */
     private function runProcess()
     {
-        $process = $this->process;
-
         try {
-            $process->mustRun();
-            $this->result = new Result($process->getOutput());
-        } catch (Pro $e) {
+            $runned = $this->process->mustRun();
+            $this->result = new Result($runned->getOutput());
+        } catch (ProcessFailedException $e) {
             switch ($e->getProcess()->getExitCode()) {
                 case 1:
                     throw new Exception('An error occurred while processing the image. It could be bad arguments, I/O errors and image handling errors from ImageMagick');
