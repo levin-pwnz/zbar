@@ -36,7 +36,7 @@ class ZbarDecoder
             $this->setPath($this->config['path']);
         }
 
-        $this->process = is_null($process) ? new Process() : $process;
+//        $this->process = is_null($process) ? new Process() : $process;
     }
 
     /**
