@@ -67,7 +67,8 @@ class ZbarDecoder
         $prefix = [$path.DIRECTORY_SEPARATOR.static::EXECUTABLE];
         $processArguments = ['-D', '--xml', '-q', $this->getFilepath()];
         $arguments = array_merge($prefix, $processArguments);
-        return new Process($arguments);
+
+        return $this->runProcess($arguments);
     }
 
     /**
@@ -118,11 +119,13 @@ class ZbarDecoder
      *
      * @throws Exception
      */
-    private function runProcess()
+    private function runProcess($arguments)
     {
+        $process = new Process($arguments);
+
         try {
-            $runned = $this->process->mustRun();
-            $this->result = new Result($runned->getOutput());
+            $process->mustRun();
+            $this->result = new Result($process->getOutput());
         } catch (ProcessFailedException $e) {
             switch ($e->getProcess()->getExitCode()) {
                 case 1:
