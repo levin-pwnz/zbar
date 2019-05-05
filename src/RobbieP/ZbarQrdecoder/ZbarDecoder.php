@@ -63,7 +63,7 @@ class ZbarDecoder
     private function buildProcess()
     {
         $path = $this->getPath();
-        $prefix = $path.DIRECTORY_SEPARATOR.static::EXECUTABLE;
+        $prefix = [$path.DIRECTORY_SEPARATOR.static::EXECUTABLE];
         $processArguments = ['-D', '--xml', '-q', $this->getFilepath()];
         $arguments = array_merge($prefix, $processArguments);
         return new Process($arguments);
