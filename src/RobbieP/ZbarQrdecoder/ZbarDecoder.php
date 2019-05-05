@@ -50,8 +50,8 @@ class ZbarDecoder
     public function make($filename)
     {
         $this->setFilepath($filename);
-        $this->buildProcess();
-        $this->runProcess();
+        $this->runProcess($this->buildProcess());
+
         return $this->output();
     }
 
@@ -68,7 +68,7 @@ class ZbarDecoder
         $processArguments = ['-D', '--xml', '-q', $this->getFilepath()];
         $arguments = array_merge($prefix, $processArguments);
 
-        return $this->runProcess($arguments);
+        return $arguments;
     }
 
     /**
