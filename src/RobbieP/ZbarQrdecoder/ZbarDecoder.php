@@ -119,7 +119,7 @@ class ZbarDecoder
      */
     private function runProcess()
     {
-        $process = $this->process->run();
+        $process = $this->process;
 
         try {
             $process->mustRun();
