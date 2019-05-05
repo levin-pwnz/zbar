@@ -124,7 +124,6 @@ class ZbarDecoder
      */
     private function runProcess($arguments)
     {
-        print_r($arguments);
         $process = new Process($arguments);
 
         try {
